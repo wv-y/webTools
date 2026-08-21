@@ -75,6 +75,7 @@ label {
 }
 
 .navigation {
+  display: flex;
   align-self: stretch;
   margin-left: 42px;
 }
@@ -100,6 +101,15 @@ label {
   border-radius: 3px 3px 0 0;
   background: #2868e8;
   content: "";
+  opacity: 0;
+}
+
+.navigation-link.active {
+  color: #2868e8;
+}
+
+.navigation-link.active::after {
+  opacity: 1;
 }
 
 .navigation-link:hover,
@@ -183,6 +193,97 @@ label {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 18px;
   min-height: calc(100vh - 210px);
+}
+
+.url-workspace {
+  grid-template-columns: minmax(0, 1fr) 180px minmax(0, 1fr);
+  align-items: stretch;
+}
+
+.url-actions {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.url-mode-label {
+  color: #647187;
+  font-size: 12px;
+  font-weight: 650;
+  text-align: center;
+}
+
+.url-actions select,
+.url-action-button {
+  width: 100%;
+  min-height: 40px;
+  border-radius: 9px;
+  font-size: 13px;
+}
+
+.url-actions select {
+  padding: 0 9px;
+  border: 1px solid #d5dfed;
+  outline: 0;
+  color: #35435a;
+  background: #fff;
+  cursor: pointer;
+}
+
+.url-actions select:focus-visible {
+  border-color: #2868e8;
+  box-shadow: 0 0 0 3px rgb(40 104 232 / 14%);
+}
+
+.url-action-button {
+  border: 0;
+  color: #fff;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.decode-action {
+  background: #3c78d8;
+  box-shadow: 0 5px 13px rgb(60 120 216 / 18%);
+}
+
+.encode-action {
+  background: #2868e8;
+  box-shadow: 0 5px 13px rgb(40 104 232 / 20%);
+}
+
+.url-action-button:hover {
+  filter: brightness(0.94);
+}
+
+.url-action-button:focus-visible {
+  outline: 2px solid #2868e8;
+  outline-offset: 2px;
+}
+
+.url-mode-hint {
+  color: #95a0b2;
+  font-size: 11px;
+  line-height: 1.4;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.url-result-content {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.url-output {
+  min-height: 100%;
+  padding: 20px;
+  color: #1b5e9a;
+  font: 14px/1.75 "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .panel {
@@ -439,6 +540,16 @@ label {
     grid-template-columns: 1fr;
   }
 
+  .url-workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .url-actions {
+    width: min(100%, 320px);
+    margin: 0 auto;
+    padding: 4px 0;
+  }
+
   .panel {
     min-height: 480px;
   }
@@ -457,6 +568,13 @@ label {
 
   .navigation {
     margin-left: auto;
+    gap: 2px;
+    overflow-x: auto;
+  }
+
+  .navigation-link {
+    padding: 0 8px;
+    white-space: nowrap;
   }
 
   .brand {
@@ -494,4 +612,3 @@ label {
     padding-left: calc(14px + var(--json-depth) * 20px);
   }
 }
-

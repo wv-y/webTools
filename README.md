@@ -1,6 +1,6 @@
 # Web Tools
 
-基于 Vue 3 的浏览器开发工具集合。目前提供 JSON 实时解析、无损大数显示、逐层折叠和复制功能。
+基于 Vue 3 的浏览器开发工具集合。目前提供 JSON 实时解析、无损大数显示、逐层折叠、复制，以及 UTF-8 URL 编解码功能。
 
 ## 环境要求
 
@@ -16,6 +16,11 @@ npm run dev
 ```
 
 浏览器打开终端中 Vite 输出的本地地址，根地址和 `#/json` 都会展示 JSON 工具。
+
+工具地址：
+
+- `#/json`：JSON 实时解析
+- `#/url`：URL 编解码，支持 `encodeURI`、`encodeURIComponent` 和仅转换 URL 参数值，默认使用 `encodeURI`
 
 ## 验证与构建
 
