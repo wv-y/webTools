@@ -13,15 +13,15 @@ window.addEventListener('hashchange', () => {
 <template>
   <div class="app-shell">
     <header class="topbar">
-      <a class="brand" :href="`#/${currentTool}`" target="_blank" rel="noopener noreferrer">
+      <a class="brand" :href="`#/${currentTool}`">
         <span class="brand-mark" aria-hidden="true">{ }</span>
         Web Tools
       </a>
       <nav class="navigation" aria-label="工具导航">
-        <a class="navigation-link" :class="{ active: currentTool === 'json' }" href="#/json" target="_blank" rel="noopener noreferrer">
+        <a class="navigation-link" :class="{ active: currentTool === 'json' }" href="#/json">
           JSON 解析
         </a>
-        <a class="navigation-link" :class="{ active: currentTool === 'url' }" href="#/url" target="_blank" rel="noopener noreferrer">
+        <a class="navigation-link" :class="{ active: currentTool === 'url' }" href="#/url">
           URL 编解码
         </a>
       </nav>
