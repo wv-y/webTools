@@ -286,6 +286,156 @@ label {
   overflow-wrap: anywhere;
 }
 
+.timestamp-panel {
+  overflow: hidden;
+  border: 1px solid #dfe6f0;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 12px 36px rgb(35 53 86 / 7%);
+}
+
+.timestamp-current,
+.timestamp-row {
+  display: grid;
+  align-items: center;
+  gap: 18px;
+  min-height: 116px;
+  padding: 24px;
+  border-bottom: 1px solid #e8edf4;
+}
+
+.timestamp-current {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  background: #f8faff;
+}
+
+.timestamp-current > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.timestamp-current > div + div {
+  padding-left: 24px;
+  border-left: 1px solid #dfe6f0;
+}
+
+.timestamp-current span,
+.timestamp-field label {
+  color: #718096;
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.timestamp-current strong {
+  color: #1d4f9b;
+  font: 700 clamp(18px, 2.4vw, 28px)/1.35 "SFMono-Regular", Consolas, monospace;
+  overflow-wrap: anywhere;
+}
+
+.timestamp-value {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 12px;
+}
+
+.timestamp-row {
+  grid-template-columns: minmax(240px, 1fr) 120px minmax(240px, 1fr);
+  align-items: end;
+}
+
+.timestamp-row:last-child {
+  border-bottom: 0;
+}
+
+.timestamp-field {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.timestamp-field input,
+.timestamp-row select {
+  min-height: 44px;
+  border: 1px solid #d5dfed;
+  border-radius: 9px;
+  outline: 0;
+  color: #26364f;
+  background: #fff;
+}
+
+.timestamp-field input {
+  width: 100%;
+  padding: 0 13px;
+  font: 15px "SFMono-Regular", Consolas, monospace;
+}
+
+.timestamp-row select {
+  width: 100%;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.timestamp-field input:focus,
+.timestamp-row select:focus-visible {
+  border-color: #2868e8;
+  box-shadow: 0 0 0 3px rgb(40 104 232 / 14%);
+}
+
+.timestamp-row output {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  padding: 10px 13px;
+  align-items: center;
+  border-radius: 9px;
+  color: #1764c0;
+  background: #f1f6ff;
+  font: 15px/1.6 "SFMono-Regular", Consolas, monospace;
+  overflow-wrap: anywhere;
+}
+
+.timestamp-row output.timestamp-error {
+  color: #a33c45;
+  background: #fff0f1;
+}
+
+.timestamp-output {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
+}
+
+.timestamp-copy-button {
+  flex: 0 0 64px;
+  min-height: 34px;
+  padding: 0 6px;
+  border: 1px solid #c9d8ee;
+  border-radius: 8px;
+  color: #2868e8;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.timestamp-copy-button:hover:not(:disabled) {
+  border-color: #2868e8;
+  background: #f1f6ff;
+}
+
+.timestamp-copy-button:disabled {
+  color: #9ca8ba;
+  border-color: #e1e7f0;
+  background: #f4f6f9;
+  cursor: not-allowed;
+}
+
 .panel {
   display: flex;
   min-width: 0;
@@ -462,6 +612,7 @@ label {
 
 .collapse-button:focus-visible,
 .copy-button:focus-visible,
+.timestamp-copy-button:focus-visible,
 .navigation-link:focus-visible,
 .brand:focus-visible {
   border-radius: 4px;
@@ -550,6 +701,14 @@ label {
     padding: 4px 0;
   }
 
+  .timestamp-row {
+    grid-template-columns: minmax(0, 1fr) 100px;
+  }
+
+  .timestamp-row output {
+    grid-column: 1 / -1;
+  }
+
   .panel {
     min-height: 480px;
   }
@@ -575,6 +734,23 @@ label {
   .navigation-link {
     padding: 0 8px;
     white-space: nowrap;
+  }
+
+  .timestamp-current,
+  .timestamp-row {
+    grid-template-columns: 1fr;
+    padding: 18px;
+  }
+
+  .timestamp-current > div + div {
+    padding-top: 18px;
+    padding-left: 0;
+    border-top: 1px solid #dfe6f0;
+    border-left: 0;
+  }
+
+  .timestamp-row output {
+    grid-column: auto;
   }
 
   .brand {

@@ -1,6 +1,6 @@
 # Web Tools
 
-基于 Vue 3 的浏览器开发工具集合。目前提供 JSON 实时解析、无损大数显示、逐层折叠、复制，以及 UTF-8 URL 编解码功能。
+基于 Vue 3 的浏览器开发工具集合。目前提供 JSON 解析、UTF-8 URL 编解码和北京时间 Unix 时间戳转换功能。
 
 ## 环境要求
 
@@ -21,6 +21,7 @@ npm run dev
 
 - `#/json`：JSON 实时解析
 - `#/url`：URL 编解码，支持 `encodeURI`、`encodeURIComponent` 和仅转换 URL 参数值，默认使用 `encodeURI`
+- `#/timestamp`：北京时间与秒级、毫秒级 Unix 时间戳互转
 
 ## 验证与构建
 
