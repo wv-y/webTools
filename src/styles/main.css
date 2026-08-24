@@ -379,6 +379,16 @@ label {
   cursor: pointer;
 }
 
+.url-actions select,
+.timestamp-row select {
+  padding-right: 32px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='m1 1 5 5 5-5' fill='none' stroke='%23647187' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px 8px;
+}
+
 .timestamp-field input:focus,
 .timestamp-row select:focus-visible {
   border-color: #2868e8;
