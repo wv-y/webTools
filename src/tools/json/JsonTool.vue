@@ -41,6 +41,13 @@ const copyText = computed(() => {
   return hasResult.value ? formatJson(parsedValue.value, preserveEscapes.value) : ''
 })
 
+function clearInput() {
+  input.value = ''
+  parsedValue.value = null
+  hasResult.value = false
+  errorMessage.value = ''
+}
+
 async function copyResult() {
   try {
     await navigator.clipboard.writeText(copyText.value)
@@ -89,7 +96,17 @@ onUnmounted(() => {
             <span class="panel-kicker">INPUT</span>
             <h2 id="json-input-title">原始 JSON</h2>
           </div>
-          <span class="character-count">{{ input.length }} 字符</span>
+          <div class="panel-header-actions">
+            <span class="character-count">{{ input.length }} 字符</span>
+            <button
+              type="button"
+              class="panel-action-button"
+              :disabled="!input"
+              @click="clearInput"
+            >
+              清空
+            </button>
+          </div>
         </div>
         <textarea
           v-model="input"
@@ -105,13 +122,14 @@ onUnmounted(() => {
             <span class="panel-kicker">OUTPUT</span>
             <h2 id="json-result-title">解析结果</h2>
           </div>
-          <div class="copy-area">
+          <div class="panel-header-actions">
             <span class="copy-status" role="status" aria-live="polite">{{ copyStatus }}</span>
-            <button class="copy-button" type="button" :disabled="!hasResult" @click="copyResult">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M8 7V5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2" />
-                <rect x="3" y="8" width="13" height="13" rx="2" />
-              </svg>
+            <button
+              class="panel-action-button panel-action-button--copy"
+              type="button"
+              :disabled="!hasResult"
+              @click="copyResult"
+            >
               复制
             </button>
           </div>

@@ -231,13 +231,13 @@ function closeLightbox() {
             <span class="panel-kicker">IMAGE</span>
             <h2 id="image-preview-title">图片预览</h2>
           </div>
-          <div class="image-header-actions">
-            <span v-if="previewImage" class="character-count image-meta">
+          <div class="panel-header-actions">
+            <span v-if="previewImage" class="character-count">
               {{ previewImage.name ? `${previewImage.name} · ` : '' }}{{ previewMeta }}
             </span>
             <button
               type="button"
-              class="image-action-button"
+              class="panel-action-button"
               :disabled="!hasContent"
               @click="clearAll"
             >
@@ -245,7 +245,7 @@ function closeLightbox() {
             </button>
             <button
               type="button"
-              class="copy-button"
+              class="panel-action-button"
               :disabled="!previewImage"
               aria-label="下载图片"
               @click="downloadImage"
@@ -300,18 +300,23 @@ function closeLightbox() {
             <span class="panel-kicker">BASE64</span>
             <h2 id="image-base64-title">{{ isDecoding ? '输入 Base64' : '生成的 Base64' }}</h2>
           </div>
-          <div class="image-header-actions">
+          <div class="panel-header-actions">
             <span class="character-count">{{ base64Input.length }} 字符</span>
             <button
               type="button"
-              class="image-action-button"
+              class="panel-action-button"
               :disabled="!base64Input"
               @click="clearAll"
             >
               清空
             </button>
             <span class="copy-status" aria-live="polite">{{ copyStatus }}</span>
-            <button type="button" class="copy-button" :disabled="!base64Input" @click="copyBase64">
+            <button
+              type="button"
+              class="panel-action-button panel-action-button--copy"
+              :disabled="!base64Input"
+              @click="copyBase64"
+            >
               复制
             </button>
           </div>

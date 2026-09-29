@@ -497,8 +497,13 @@ label {
 }
 
 .character-count {
+  min-width: 0;
+  overflow: hidden;
   color: #95a0b2;
   font-size: 12px;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .input-panel textarea {
@@ -524,23 +529,14 @@ label {
   box-shadow: inset 0 0 0 2px rgb(40 104 232 / 18%);
 }
 
-.copy-area {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.copy-status {
-  color: #58708f;
-  font-size: 12px;
-}
-
-.copy-button {
+/* JSON 解析、URL 编解码、图片 Base64 互转共用的面板操作按钮（清空 / 复制 / 下载） */
+.panel-action-button {
   display: inline-flex;
-  align-items: center;
-  gap: 7px;
+  flex: 0 0 auto;
   min-height: 36px;
   padding: 0 13px;
+  align-items: center;
+  gap: 7px;
   border: 0;
   border-radius: 9px;
   color: white;
@@ -551,24 +547,33 @@ label {
   box-shadow: 0 5px 13px rgb(40 104 232 / 20%);
 }
 
-.copy-button svg {
+/* 复制按钮的图标：图形写在共用样式里，用 mask 上色，颜色自动跟随按钮文字（禁用时同步变灰） */
+.panel-action-button--copy::before {
+  --copy-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 7V5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2'/%3E%3Crect x='3' y='8' width='13' height='13' rx='2'/%3E%3C/svg%3E");
+
   width: 15px;
-  fill: none;
-  stroke: currentcolor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.8;
+  height: 15px;
+  flex: 0 0 auto;
+  background: currentcolor;
+  content: "";
+  -webkit-mask: var(--copy-icon) center / contain no-repeat;
+  mask: var(--copy-icon) center / contain no-repeat;
 }
 
-.copy-button:hover:not(:disabled) {
+.panel-action-button:hover:not(:disabled) {
   background: #1e5dd8;
 }
 
-.copy-button:disabled {
+.panel-action-button:disabled {
   color: #9ca8ba;
   background: #e8edf4;
   cursor: not-allowed;
   box-shadow: none;
+}
+
+.copy-status {
+  color: #58708f;
+  font-size: 12px;
 }
 
 .result-content {
@@ -639,7 +644,7 @@ label {
 }
 
 .collapse-button:focus-visible,
-.copy-button:focus-visible,
+.panel-action-button:focus-visible,
 .timestamp-copy-button:focus-visible,
 .navigation-link:focus-visible,
 .brand:focus-visible {
@@ -751,7 +756,6 @@ label {
 }
 
 .image-mode-button:focus-visible,
-.image-action-button:focus-visible,
 .image-preview-image:focus-visible,
 .image-lightbox-close:focus-visible {
   outline: 2px solid #2868e8;
@@ -763,25 +767,12 @@ label {
   font-size: 13px;
 }
 
-.image-header-actions {
+/* 面板头部右侧的操作区：字数/文件信息 + 操作按钮 */
+.panel-header-actions {
   display: flex;
   min-width: 0;
   align-items: center;
   gap: 10px;
-}
-
-.image-header-actions > button {
-  flex: 0 0 auto;
-}
-
-.image-header-actions .image-meta {
-  min-width: 0;
-  overflow: hidden;
-  color: #95a0b2;
-  font-size: 12px;
-  text-align: right;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .image-preview {
@@ -862,31 +853,6 @@ label {
   color: #95a0b2;
   font-size: 12px;
   line-height: 1.6;
-}
-
-.image-action-button {
-  flex: 0 0 auto;
-  min-height: 34px;
-  padding: 0 14px;
-  border: 1px solid #c9d8ee;
-  border-radius: 9px;
-  color: #2868e8;
-  background: #fff;
-  font-size: 13px;
-  font-weight: 650;
-  cursor: pointer;
-}
-
-.image-action-button:hover:not(:disabled) {
-  border-color: #2868e8;
-  background: #f1f6ff;
-}
-
-.image-action-button:disabled {
-  color: #9ca8ba;
-  border-color: #e1e7f0;
-  background: #f4f6f9;
-  cursor: not-allowed;
 }
 
 .image-input-panel textarea {

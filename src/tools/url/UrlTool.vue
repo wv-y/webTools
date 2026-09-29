@@ -1,11 +1,18 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, onUnmounted, ref } from 'vue'
 import { decodeUrl, encodeUrl, URL_MODES } from './url.js'
 
 const input = ref('')
 const output = ref('')
 const mode = ref(URL_MODES.URI)
 const errorMessage = ref('')
+const copyStatus = ref('')
+
+let copyTimer
+
+onUnmounted(() => {
+  window.clearTimeout(copyTimer)
+})
 
 const modeLabel = computed(() => {
   if (mode.value === URL_MODES.URI) return 'encodeURI'
@@ -22,6 +29,28 @@ function run(action) {
     output.value = ''
     errorMessage.value = `无法${action === 'encode' ? '编码' : '解码'}：${error.message}`
   }
+}
+
+function clearAll() {
+  input.value = ''
+  output.value = ''
+  errorMessage.value = ''
+}
+
+async function copyOutput() {
+  if (!output.value) return
+
+  try {
+    await navigator.clipboard.writeText(output.value)
+    copyStatus.value = '复制成功'
+  } catch {
+    copyStatus.value = '复制失败'
+  }
+
+  window.clearTimeout(copyTimer)
+  copyTimer = window.setTimeout(() => {
+    copyStatus.value = ''
+  }, 1800)
 }
 </script>
 
@@ -42,7 +71,17 @@ function run(action) {
             <span class="panel-kicker">INPUT</span>
             <h2 id="url-input-title">输入内容</h2>
           </div>
-          <span class="character-count">{{ input.length }} 字符</span>
+          <div class="panel-header-actions">
+            <span class="character-count">{{ input.length }} 字符</span>
+            <button
+              type="button"
+              class="panel-action-button"
+              :disabled="!input && !output"
+              @click="clearAll"
+            >
+              清空
+            </button>
+          </div>
         </div>
         <textarea
           v-model="input"
@@ -73,6 +112,17 @@ function run(action) {
           <div>
             <span class="panel-kicker">OUTPUT</span>
             <h2 id="url-output-title">结果</h2>
+          </div>
+          <div class="panel-header-actions">
+            <span class="copy-status" role="status" aria-live="polite">{{ copyStatus }}</span>
+            <button
+              type="button"
+              class="panel-action-button panel-action-button--copy"
+              :disabled="!output"
+              @click="copyOutput"
+            >
+              复制
+            </button>
           </div>
         </div>
         <div class="result-content url-result-content">
