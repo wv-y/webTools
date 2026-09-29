@@ -1,10 +1,11 @@
 <script setup>
 import { ref } from 'vue'
+import ImageTool from './tools/image/ImageTool.vue'
 import JsonTool from './tools/json/JsonTool.vue'
 import TimestampTool from './tools/timestamp/TimestampTool.vue'
 import UrlTool from './tools/url/UrlTool.vue'
 
-const tools = ['json', 'url', 'timestamp']
+const tools = ['json', 'url', 'timestamp', 'image']
 const getCurrentTool = () => {
   const tool = window.location.hash.replace('#/', '')
   return tools.includes(tool) ? tool : 'json'
@@ -33,12 +34,16 @@ window.addEventListener('hashchange', () => {
         <a class="navigation-link" :class="{ active: currentTool === 'timestamp' }" href="#/timestamp">
           时间戳转换
         </a>
+        <a class="navigation-link" :class="{ active: currentTool === 'image' }" href="#/image">
+          图片 Base64
+        </a>
       </nav>
     </header>
 
     <main class="main-content">
       <UrlTool v-if="currentTool === 'url'" />
       <TimestampTool v-else-if="currentTool === 'timestamp'" />
+      <ImageTool v-else-if="currentTool === 'image'" />
       <JsonTool v-else />
     </main>
   </div>
