@@ -36,7 +36,9 @@ label {
 }
 
 .app-shell {
+  display: flex;
   min-height: 100vh;
+  flex-direction: column;
 }
 
 .topbar {
@@ -118,9 +120,21 @@ label {
 }
 
 .main-content {
+  display: flex;
   width: min(1600px, 100%);
+  min-height: 0;
   margin: 0 auto;
   padding: 34px 4vw 48px;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
+/* 工具页按剩余高度铺满，避免写死高度导致页面出现无谓的滚动条 */
+.tool-page {
+  display: flex;
+  min-height: 0;
+  flex: 1 1 auto;
+  flex-direction: column;
 }
 
 .tool-heading {
@@ -192,7 +206,10 @@ label {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 18px;
-  min-height: calc(100vh - 210px);
+  /* 严格铺满标题区之下的剩余高度：面板可以随窗口变矮，内容在面板内部滚动，
+     这样空页面在任何窗口高度下都不会出现整页滚动条 */
+  min-height: 0;
+  flex: 1 1 auto;
 }
 
 .url-workspace {
@@ -449,7 +466,7 @@ label {
 .panel {
   display: flex;
   min-width: 0;
-  min-height: 560px;
+  min-height: 0;
   overflow: hidden;
   flex-direction: column;
   border: 1px solid #dfe6f0;
@@ -486,7 +503,8 @@ label {
 
 .input-panel textarea {
   width: 100%;
-  min-height: 490px;
+  /* 高度交给面板，内容超出时文本域内部滚动 */
+  min-height: 0;
   padding: 20px;
   flex: 1;
   resize: none;
@@ -554,7 +572,7 @@ label {
 }
 
 .result-content {
-  min-height: 490px;
+  min-height: 0;
   overflow: auto;
   padding: 17px 0;
   flex: 1;
