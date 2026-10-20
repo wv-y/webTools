@@ -73,7 +73,7 @@ async function copyValue(value, key) {
       <div>
         <p class="eyebrow">DEVELOPER TOOL</p>
         <h1 id="timestamp-tool-title">Unix 时间戳转换</h1>
-        <p>所有时间均按北京时间（UTC+8）解析和显示。</p>
+        <p>所有时间均按北京时间（UTC+8）解析和显示。可输入不完整时间，缺省的月、日按 1，时、分、秒按 0 处理，月、日、时、分、秒也可省略前导 0。</p>
       </div>
     </div>
 
@@ -117,7 +117,7 @@ async function copyValue(value, key) {
             v-model="timestampInput"
             type="text"
             inputmode="numeric"
-            placeholder="输入 Unix 时间戳"
+            placeholder="输入 Unix 时间戳，支持千分位逗号"
             autocomplete="off"
           />
         </div>
@@ -148,7 +148,7 @@ async function copyValue(value, key) {
             id="time-input"
             v-model="timeInput"
             type="text"
-            placeholder="时间格式：YYYY-MM-DD HH:mm:ss"
+            placeholder="格式：YYYY-MM-DD HH:mm:ss，可省略部分和前导 0"
             autocomplete="off"
           />
         </div>
